@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CBE3B8BB235E324F00AAA6AE /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3B8BA235E324F00AAA6AE /* QuestViewController.swift */; };
 		F3A9F700235799F0003EA180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A9F6FF235799F0003EA180 /* AppDelegate.swift */; };
-		F3A9F702235799F0003EA180 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A9F701235799F0003EA180 /* ViewController.swift */; };
+		F3A9F702235799F0003EA180 /* NewAdventurerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A9F701235799F0003EA180 /* NewAdventurerViewController.swift */; };
 		F3A9F705235799F0003EA180 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3A9F703235799F0003EA180 /* Main.storyboard */; };
 		F3A9F708235799F0003EA180 /* group4_assignment6.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3A9F706235799F0003EA180 /* group4_assignment6.xcdatamodeld */; };
 		F3A9F70A235799F0003EA180 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3A9F709235799F0003EA180 /* Assets.xcassets */; };
@@ -17,9 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CBE3B8BA235E324F00AAA6AE /* QuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
 		F3A9F6FC235799F0003EA180 /* group4_assignment6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = group4_assignment6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3A9F6FF235799F0003EA180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F3A9F701235799F0003EA180 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F3A9F701235799F0003EA180 /* NewAdventurerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdventurerViewController.swift; sourceTree = "<group>"; };
 		F3A9F704235799F0003EA180 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F3A9F707235799F0003EA180 /* group4_assignment6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = group4_assignment6.xcdatamodel; sourceTree = "<group>"; };
 		F3A9F709235799F0003EA180 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,8 +61,9 @@
 			isa = PBXGroup;
 			children = (
 				F3A9F6FF235799F0003EA180 /* AppDelegate.swift */,
-				F3A9F701235799F0003EA180 /* ViewController.swift */,
 				F3A9F716235A305D003EA180 /* AdventurerTableViewController.swift */,
+				F3A9F701235799F0003EA180 /* NewAdventurerViewController.swift */,
+				CBE3B8BA235E324F00AAA6AE /* QuestViewController.swift */,
 				F3A9F703235799F0003EA180 /* Main.storyboard */,
 				F3A9F709235799F0003EA180 /* Assets.xcassets */,
 				F3A9F70B235799F0003EA180 /* LaunchScreen.storyboard */,
@@ -143,7 +146,8 @@
 			files = (
 				F3A9F708235799F0003EA180 /* group4_assignment6.xcdatamodeld in Sources */,
 				F3A9F717235A305D003EA180 /* AdventurerTableViewController.swift in Sources */,
-				F3A9F702235799F0003EA180 /* ViewController.swift in Sources */,
+				CBE3B8BB235E324F00AAA6AE /* QuestViewController.swift in Sources */,
+				F3A9F702235799F0003EA180 /* NewAdventurerViewController.swift in Sources */,
 				F3A9F700235799F0003EA180 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
