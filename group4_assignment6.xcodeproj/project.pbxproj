@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CBE3B8BB235E324F00AAA6AE /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3B8BA235E324F00AAA6AE /* QuestViewController.swift */; };
+		CBE3B8BD235E942600AAA6AE /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3B8BC235E942600AAA6AE /* Enemy.swift */; };
 		F3A9F700235799F0003EA180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A9F6FF235799F0003EA180 /* AppDelegate.swift */; };
 		F3A9F702235799F0003EA180 /* NewAdventurerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A9F701235799F0003EA180 /* NewAdventurerViewController.swift */; };
 		F3A9F705235799F0003EA180 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3A9F703235799F0003EA180 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		CBE3B8BA235E324F00AAA6AE /* QuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
+		CBE3B8BC235E942600AAA6AE /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		F3A9F6FC235799F0003EA180 /* group4_assignment6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = group4_assignment6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3A9F6FF235799F0003EA180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3A9F701235799F0003EA180 /* NewAdventurerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdventurerViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				F3A9F701235799F0003EA180 /* NewAdventurerViewController.swift */,
 				CBE3B8BA235E324F00AAA6AE /* QuestViewController.swift */,
 				F3A9F703235799F0003EA180 /* Main.storyboard */,
+				CBE3B8BC235E942600AAA6AE /* Enemy.swift */,
 				F3A9F709235799F0003EA180 /* Assets.xcassets */,
 				F3A9F70B235799F0003EA180 /* LaunchScreen.storyboard */,
 				F3A9F70E235799F0003EA180 /* Info.plist */,
@@ -146,6 +149,7 @@
 			files = (
 				F3A9F708235799F0003EA180 /* group4_assignment6.xcdatamodeld in Sources */,
 				F3A9F717235A305D003EA180 /* AdventurerTableViewController.swift in Sources */,
+				CBE3B8BD235E942600AAA6AE /* Enemy.swift in Sources */,
 				CBE3B8BB235E324F00AAA6AE /* QuestViewController.swift in Sources */,
 				F3A9F702235799F0003EA180 /* NewAdventurerViewController.swift in Sources */,
 				F3A9F700235799F0003EA180 /* AppDelegate.swift in Sources */,
