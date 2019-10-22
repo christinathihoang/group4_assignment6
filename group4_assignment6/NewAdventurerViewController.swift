@@ -12,10 +12,10 @@ import os.log
 
 class AdventurerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var adventurerImage: UIImageView!
+
 }
 
 
-// ENTER AND SAVE NEW ENTRIES
 class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -42,6 +42,11 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         dismiss(animated: true, completion: nil)
     }
     
+    let characterImages = ["character1","character2","character3"]
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
@@ -50,6 +55,8 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath as IndexPath) as! AdventurerCollectionViewCell
+        cell.adventurerImage?.image = UIImage(named: "character1")
+    
         return cell
     }
     
@@ -98,8 +105,6 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
             return
         }
         
-
-        // Set the meal to be passed to MealTableViewController after the unwind segue.
         newPerson = save(name: nameTextField.text!, profession: classTextField.text!)
     }
  
