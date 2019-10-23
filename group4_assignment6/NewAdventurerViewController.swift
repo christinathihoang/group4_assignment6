@@ -59,6 +59,8 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         return cell
     }
     
+    
+    
     //creates and saves new character to Core Data
     func saveNewCharacter(name: String, profession: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

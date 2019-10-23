@@ -336,6 +336,7 @@
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ctj-Vz-kCi">
                                                 <rect key="frame" x="0.0" y="134.5" width="343" height="128"/>
+                                                <color key="backgroundColor" red="0.89813512559999997" green="0.36329792589999998" blue="0.72904301969999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ms8-1P-e7w">
                                                     <size key="itemSize" width="125" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -376,6 +377,7 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="ctj-Vz-kCi" firstAttribute="leading" secondItem="9BG-Py-wih" secondAttribute="leading" id="RlW-sf-imq"/>
+                                            <constraint firstItem="ctj-Vz-kCi" firstAttribute="top" secondItem="4mm-2A-29m" secondAttribute="bottom" constant="18" id="dfT-2x-QLD"/>
                                             <constraint firstAttribute="trailing" secondItem="ctj-Vz-kCi" secondAttribute="trailing" id="evw-4C-hdt"/>
                                             <constraint firstAttribute="bottom" secondItem="ctj-Vz-kCi" secondAttribute="bottom" id="kcU-kX-zzK"/>
                                         </constraints>
