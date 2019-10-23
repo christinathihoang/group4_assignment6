@@ -31,10 +31,9 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
     //saves character
     @IBAction func saveButton(_ sender: UIButton) {
         if(nameTextField.text! != "" && classTextField.text! != "") {
-            self.save(name: nameTextField.text!, profession: classTextField.text!)
-        
-        dismiss(animated: true, completion: nil)
+            saveNewCharacter(name: nameTextField.text!, profession: classTextField.text!)
         }
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -49,7 +48,7 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -60,52 +59,28 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         return cell
     }
     
-    //creates character
-    func save(name: String, profession: String) -> NSManagedObject {
+    //creates and saves new character to Core Data
+    func saveNewCharacter(name: String, profession: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return NSManagedObject()
+                return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Adventurer", in: managedContext)! 
-        let person = NSManagedObject(entity: entity, insertInto: managedContext)
+        let character = NSManagedObject(entity: entity, insertInto: managedContext)
         
         //initializes attributes
-        person.setValue(name, forKeyPath: "name")
-        person.setValue(profession, forKeyPath: "profession")
-        person.setValue(1, forKeyPath: "level")
-        person.setValue(10, forKeyPath: "currentHP")
-        person.setValue(10, forKeyPath: "totalHP")
-        person.setValue(5, forKeyPath: "attackModifier")
+        character.setValue(name, forKeyPath: "name")
+        character.setValue(profession, forKeyPath: "profession")
+        character.setValue(1, forKeyPath: "level")
+        character.setValue(10, forKeyPath: "currentHP")
+        character.setValue(10, forKeyPath: "totalHP")
+        character.setValue(5, forKeyPath: "attackModifier")
         
-        return person
-        /*
-        // append to adventurers array in table view
         do {
             try managedContext.save()
-            adventurers.append(person)
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
- */
-
-
-    }
-    
-    var newPerson:NSManagedObject? = nil
-    
-    // This method lets you configure a view controller before it's presented.
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        super.prepare(for: segue, sender: sender)
-        
-        // Configure the destination view controller only when the save button is pressed.
-        guard let button = sender as? UIButton, button == saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-            return
-        }
-        
-        newPerson = save(name: nameTextField.text!, profession: classTextField.text!)
     }
  
     
