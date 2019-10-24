@@ -32,6 +32,7 @@ class AdventurerTableViewController: UITableViewController {
         
         //fetch core data here
         fetchData()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,7 +135,7 @@ class AdventurerTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let presenter = segue.destination as? QuestViewController {
             let selectedCharacter = tableView.indexPathForSelectedRow!.row
-            presenter.adventurer = adventurers[selectedCharacter]
+            presenter.chosenAdventurer = adventurers[selectedCharacter]
         }
     }
     
