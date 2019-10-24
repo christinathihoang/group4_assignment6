@@ -131,8 +131,17 @@ class AdventurerTableViewController: UITableViewController {
     
 
     // MARK: - Navigation
-    @IBAction func unwindToAdventurerTableView(sender: UIStoryboardSegue) {
-        tableView.reloadData()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let presenter = segue.destination as? QuestViewController {
+            let selectedCharacter = tableView.indexPathForSelectedRow!.row
+            presenter.adventurer = adventurers[selectedCharacter]
+        }
     }
+    
+    
+    @IBAction func unwindToAdventurerTableView(sender: UIStoryboardSegue) {
+        //tableView.reloadData()
+    }
+ 
     
 }

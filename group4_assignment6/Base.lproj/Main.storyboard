@@ -111,7 +111,7 @@
                                     <outlet property="adventurerProfession" destination="L35-A1-ii7" id="qet-Cy-UfK"/>
                                     <outlet property="attackPoints" destination="fEM-zc-SFO" id="QqT-Fg-adb"/>
                                     <outlet property="hpPoints" destination="WTI-ee-IPT" id="D9T-Jb-i9B"/>
-                                    <segue destination="Hft-zC-IrU" kind="show" id="9dC-wp-DcF"/>
+                                    <segue destination="Hft-zC-IrU" kind="show" identifier="questViewSegue" id="9dC-wp-DcF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -246,7 +246,7 @@
                                         <rect key="frame" x="271" y="323.5" width="72" height="30"/>
                                         <state key="normal" title="End Quest"/>
                                         <connections>
-                                            <segue destination="tli-1j-Bhm" kind="unwind" unwindAction="unwindToAdventurersTableViewWithSender:" id="M26-IJ-BSe"/>
+                                            <segue destination="tli-1j-Bhm" kind="unwind" unwindAction="unwindToAdventurerTableViewWithSender:" id="lQC-0a-ggD"/>
                                         </connections>
                                     </button>
                                 </subviews>
