@@ -23,6 +23,7 @@ class AdventurerTableViewCell: UITableViewCell {
 }
 
 var adventurers: [NSManagedObject] = []
+var adventurer: NSManagedObject = NSManagedObject()
 
 class AdventurerTableViewController: UITableViewController {
 
@@ -89,7 +90,24 @@ class AdventurerTableViewController: UITableViewController {
         
     }
     
-    func deleteData(name:String) {
+    func fetchAdventurer(name:String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Adventurer")
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        do {
+            let test = try managedContext.fetch(fetchRequest)
+            let objectToSelect:NSManagedObject = test[0]
+            adventurer = objectToSelect
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    func deleteAdventurer(name:String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }

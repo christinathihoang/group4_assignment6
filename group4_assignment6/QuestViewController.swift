@@ -22,8 +22,27 @@ class QuestViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.questLog.setContentOffset(CGPoint.zero, animated: false)
+    
+    
+    func startQuestLog() {
+        questLog.text = "Beginning quest..."
+        // select an enemy and attack
+        let enemy = Enemy(name: "Enemy", level: 5, attackModifiers: 5, hitPoints: 5)
+        // start timer
+        //timer = Timer.scheduledTimer(timeInterval: [time interval], target: self, selector: attackEnemy(), userInfo: nil, repeats: true)
+        
+        
+        // if enemy defeated, then level up
+    }
+    
+    // pass in enemy and adventurer
+    func attackEnemy(enemy: Enemy, adventurer: String) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is QuestViewController {
+            
+        }
     }
 }

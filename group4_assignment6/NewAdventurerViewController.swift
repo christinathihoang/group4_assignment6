@@ -12,7 +12,6 @@ import os.log
 
 class AdventurerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var adventurerImage: UIImageView!
-
 }
 
 
@@ -87,4 +86,3 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
  
     
 }
-
