@@ -25,7 +25,6 @@ class QuestViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // set up adventurer stats
         adventurerName.text = chosenAdventurer.value(forKeyPath: "name") as? String
         let level:Int = chosenAdventurer.value(forKey: "level") as! Int
         adventurerLevel.text = String(level)
@@ -37,7 +36,6 @@ class QuestViewController: UIViewController {
         hpPoints.text = String(currentHP) + "/" + String(totalHP)
         
         startQuestLog()
-        
     }
     
     
@@ -52,19 +50,21 @@ class QuestViewController: UIViewController {
         let enemyCount = 0
         
         while currentHP > 0 {
-            
             // find and attack an enemy
             let chosenEnemy = Enemy(name: "Enemy", level: 1, attackModifiers: 1, hitPoints: 1)
             
-            if chosenEnemy.hitPoints > 0 {
+            if Int(chosenAdventurer.value(forKey: "currentHP") as! Int) <= 0 {
+                return
+            }
+            else if chosenEnemy.hitPoints > 0 {
                 questLog.text += "This is working\n"
                 currentHP -= 1
-                //adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {testingTimer()}
                 guard adventurerTimer == nil else { return }
-                adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.attackEnemy(enemy: chosenEnemy, adventurer: self.chosenAdventurer)})
+                adventurerTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(arc4random_uniform(10)), repeats: true, block: {_ in self.attackEnemy(enemy: chosenEnemy, adventurer: self.chosenAdventurer)})
                 guard enemyTimer == nil else {return}
-                enemyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.attackAdventurer(enemy: chosenEnemy, adventurer: self.chosenAdventurer)})
+                enemyTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(arc4random_uniform(10)), repeats: true, block: {_ in self.attackAdventurer(enemy: chosenEnemy, adventurer: self.chosenAdventurer)})
                 }
+                
             else if enemyCount > 2 {
                 currentLevel += 1
                 questLog.text += "Level Up!\n"
@@ -73,6 +73,7 @@ class QuestViewController: UIViewController {
                 questLog.text += "Adventurer has reached the end!\n"
                 return
             }
+            
         }
 
         }
@@ -101,6 +102,7 @@ class QuestViewController: UIViewController {
         if adventurerCurrentHP <= 0 {
             questLog.text += "\(adventurerName) has been defeated by the enemy!\n"
             updateData(chosenAdventurer: adventurer, currentLevel: currentLevel, currentHP: 0)
+            return
         }
     }
     

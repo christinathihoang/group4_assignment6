@@ -144,10 +144,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Hev-ze-7C1">
-                                <rect key="frame" x="16" y="80" width="343" height="353.5"/>
+                                <rect key="frame" x="16" y="80" width="343" height="551.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1P7-LZ-9C6">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="316.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="514.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="etv-AR-Lro">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="131"/>
@@ -231,11 +231,11 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1V0-Or-RU0">
-                                                <rect key="frame" x="0.0" y="171.5" width="343" height="145"/>
+                                                <rect key="frame" x="0.0" y="171.5" width="343" height="343"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="343" id="9yG-uL-Wxr"/>
                                                     <constraint firstAttribute="width" constant="343" id="Hm5-O8-9uy"/>
-                                                    <constraint firstAttribute="height" constant="145" id="VSc-GA-zKF"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -243,7 +243,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7H-ab-Sbk">
-                                        <rect key="frame" x="271" y="323.5" width="72" height="30"/>
+                                        <rect key="frame" x="271" y="521.5" width="72" height="30"/>
                                         <state key="normal" title="End Quest"/>
                                         <connections>
                                             <segue destination="tli-1j-Bhm" kind="unwind" unwindAction="unwindToAdventurerTableViewWithSender:" id="lQC-0a-ggD"/>
