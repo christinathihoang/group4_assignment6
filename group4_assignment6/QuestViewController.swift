@@ -49,12 +49,13 @@ class QuestViewController: UIViewController {
         var currentLevel = Int(chosenAdventurer.value(forKey: "level") as! Int)
         let enemyCount = 0
         
-        while currentHP > 0 {
+        outerloop: while currentHP > 0 {
+            
             // find and attack an enemy
             let chosenEnemy = Enemy(name: "Enemy", level: 1, attackModifiers: 1, hitPoints: 1)
             
             if Int(chosenAdventurer.value(forKey: "currentHP") as! Int) <= 0 {
-                return
+                break outerloop
             }
             else if chosenEnemy.hitPoints > 0 {
                 questLog.text += "This is working\n"
@@ -102,7 +103,6 @@ class QuestViewController: UIViewController {
         if adventurerCurrentHP <= 0 {
             questLog.text += "\(adventurerName) has been defeated by the enemy!\n"
             updateData(chosenAdventurer: adventurer, currentLevel: currentLevel, currentHP: 0)
-            return
         }
     }
     
