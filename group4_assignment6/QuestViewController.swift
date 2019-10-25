@@ -17,12 +17,13 @@ class QuestViewController: UIViewController {
     @IBOutlet weak var adventurerLevel: UILabel!
     @IBOutlet weak var hpPoints: UILabel!
     @IBOutlet weak var attackPoints: UILabel!
+    
     @IBOutlet weak var questLog: UITextView!
     
     var chosenAdventurer: NSManagedObject = NSManagedObject()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // set up adventurer stats
         adventurerName.text = chosenAdventurer.value(forKeyPath: "name") as? String
@@ -34,23 +35,52 @@ class QuestViewController: UIViewController {
         let currentHP:Int = chosenAdventurer.value(forKeyPath: "currentHP") as! Int
         let totalHP:Int = chosenAdventurer.value(forKeyPath: "totalHP") as! Int
         hpPoints.text = String(currentHP) + "/" + String(totalHP)
+        
+        startQuestLog()
+        
     }
     
     
     func startQuestLog() {
-        questLog.text = "Beginning quest..."
-        // select an enemy and attack
-        let chosenEnemy = Enemy(name: "Enemy", level: 5, attackModifiers: 5, hitPoints: 5)
-        // start timer
-        //randomTimeInterval = Int(arc4random(4))
-        let adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {_ in self.attackEnemy(enemy: chosenEnemy, adventurer: self.chosenAdventurer)
-        }
-        let enemyTime = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {_ in self.attackAdventurer(enemy: chosenEnemy, adventurer: self.chosenAdventurer)
-        }
+        questLog.text = "Beginning quest!\n"
         
+        var adventurerTimer = Timer()
+        var enemyTimer = Timer()
+        
+        var currentHP = Int(chosenAdventurer.value(forKey: "currentHP") as! Int)
+        var currentLevel = Int(chosenAdventurer.value(forKey: "level") as! Int)
+        let enemyCount = 0
+        
+        while currentHP > 0 {
+            
+            // find and attack an enemy
+            let chosenEnemy = Enemy(name: "Enemy", level: 1, attackModifiers: 1, hitPoints: 1)
+            
+            if chosenEnemy.hitPoints > 0 {
+                questLog.text += "This is working\n"
+                currentHP -= 1
+                //adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {testingTimer()}
+                guard adventurerTimer == nil else { return }
+                adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.testingTimer()})
+                guard enemyTimer == nil else {return}
+                enemyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.testingTimer2()})
+                }
+            else if enemyCount > 2 {
+                currentLevel += 1
+                questLog.text += "Level Up!"
+            }
+        }
+        // save new stats
+        //updateData(chosenAdventurer: chosenAdventurer, currentLevel: currentLevel, currentHP: currentHP)
         
         }
-        
+    
+    func testingTimer() {
+        questLog.text += "Timer is working\n"
+    }
+        func testingTimer2() {
+            questLog.text += "22222\n"
+        }
     
     // pass in enemy and adventurer
     func attackEnemy(enemy: Enemy, adventurer: NSManagedObject) {
@@ -74,7 +104,22 @@ class QuestViewController: UIViewController {
         if adventurerCurrentHP <= 0 {
             questLog.text += String(adventurerName) + "has been defeated by the enemy!"
         }
-        
     }
+    
+    func updateData(chosenAdventurer:NSManagedObject, currentLevel:Int, currentHP: Int) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        do {
+            chosenAdventurer.setValue(currentLevel, forKey: "level")
+            chosenAdventurer.setValue(currentHP, forKeyPath: "currentHP")
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not update. \(error), \(error.userInfo)")
+        }
+    }
+        
+    
     
 }
