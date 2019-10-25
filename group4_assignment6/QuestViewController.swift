@@ -61,50 +61,49 @@ class QuestViewController: UIViewController {
                 currentHP -= 1
                 //adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {testingTimer()}
                 guard adventurerTimer == nil else { return }
-                adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.testingTimer()})
+                adventurerTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.attackEnemy(enemy: chosenEnemy, adventurer: self.chosenAdventurer)})
                 guard enemyTimer == nil else {return}
-                enemyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.testingTimer2()})
+                enemyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {_ in self.attackAdventurer(enemy: chosenEnemy, adventurer: self.chosenAdventurer)})
                 }
             else if enemyCount > 2 {
                 currentLevel += 1
-                questLog.text += "Level Up!"
+                questLog.text += "Level Up!\n"
+            }
+            else if currentLevel >= 5 {
+                questLog.text += "Adventurer has reached the end!\n"
+                return
             }
         }
-        // save new stats
-        //updateData(chosenAdventurer: chosenAdventurer, currentLevel: currentLevel, currentHP: currentHP)
-        
-        }
-    
-    func testingTimer() {
-        questLog.text += "Timer is working\n"
-    }
-        func testingTimer2() {
-            questLog.text += "22222\n"
+
         }
     
     // pass in enemy and adventurer
     func attackEnemy(enemy: Enemy, adventurer: NSManagedObject) {
         let adventurerName = adventurer.value(forKey: "name") as! String
         let damage = Int(arc4random())*(adventurer.value(forKey: "attackModifier") as! Int)
-        questLog.text += String(adventurerName) + "attacks for" + String(damage) + "damage"
+        questLog.text += "\(adventurerName) attacks for \(damage) damage.\n"
         enemy.hitPoints -= damage
         if enemy.hitPoints <= 0 {
-            questLog.text += "Enemy is defeated!"
+            questLog.text += "Enemy is defeated!\n"
         }
-        
     }
     
     func attackAdventurer(enemy: Enemy, adventurer: NSManagedObject) {
-        let enemyName = enemy.name
         let adventurerName = adventurer.value(forKey: "name") as! String
-        let adventurerCurrentHP = adventurer.value(forKey: "currentHP") as! Int
+        
+        let currentLevel = Int(chosenAdventurer.value(forKey: "level") as! Int)
+        var adventurerCurrentHP = adventurer.value(forKey: "currentHP") as! Int
+        
         let damage = Int(arc4random())*Int(enemy.attackModifiers)
-        questLog.text += String(enemyName) + "attacks for" + String(damage) + "damage"
-        //Int(adventurer.value(forKey: "currentHP") as! Int) -= Int(damage)
+        questLog.text += "Enemy attacks for \(damage) damage.\n"
+        adventurerCurrentHP -= damage
+        updateData(chosenAdventurer: adventurer, currentLevel: currentLevel, currentHP: adventurerCurrentHP)
         if adventurerCurrentHP <= 0 {
-            questLog.text += String(adventurerName) + "has been defeated by the enemy!"
+            questLog.text += "\(adventurerName) has been defeated by the enemy!\n"
+            updateData(chosenAdventurer: adventurer, currentLevel: currentLevel, currentHP: 0)
         }
     }
+    
     
     func updateData(chosenAdventurer:NSManagedObject, currentLevel:Int, currentHP: Int) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -119,7 +118,5 @@ class QuestViewController: UIViewController {
             print("Could not update. \(error), \(error.userInfo)")
         }
     }
-        
-    
     
 }
