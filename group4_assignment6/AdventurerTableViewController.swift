@@ -32,6 +32,7 @@ class AdventurerTableViewController: UITableViewController {
         
         //fetch core data here
         fetchData()
+   
 
     }
     

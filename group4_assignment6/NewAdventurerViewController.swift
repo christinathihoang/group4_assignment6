@@ -75,7 +75,7 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         character.setValue(1, forKeyPath: "level")
         character.setValue(10, forKeyPath: "currentHP")
         character.setValue(10, forKeyPath: "totalHP")
-        character.setValue(5, forKeyPath: "attackModifier")
+        character.setValue(3.5, forKeyPath: "attackModifier")
         
         do {
             try managedContext.save()
