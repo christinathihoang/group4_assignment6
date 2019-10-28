@@ -31,10 +31,11 @@ class QuestViewController: UIViewController {
         adventurerLevel.text = String(level)
         adventurerProfession.text = chosenAdventurer.value(forKeyPath: "profession") as? String
         let attackModifier: Double = chosenAdventurer.value(forKeyPath: "attackModifier") as! Double
-        attackPoints.text = String(attackModifier)
+        attackPoints.text = String(format: "%.2f", attackModifier)
         let currentHP:Int = chosenAdventurer.value(forKeyPath: "currentHP") as! Int
         let totalHP:Int = chosenAdventurer.value(forKeyPath: "totalHP") as! Int
         hpPoints.text = String(currentHP) + "/" + String(totalHP)
+        adventurerImage.image = UIImage(named: chosenAdventurer.value(forKeyPath: "portrait") as! String)
         
         startQuestLog()
     }
@@ -86,20 +87,20 @@ class QuestViewController: UIViewController {
         }
     
     func attackEnemy(enemy: Enemy, currentHP: Int) {
-        let adventurerName = adventurer.value(forKey: "name") as! String
-        let damage = Double(arc4random())*(adventurer.value(forKey: "attackModifier") as! Double)
+        let adventurerName = chosenAdventurer.value(forKey: "name") as! String
+        let damage = Int(Double.random(in: 1...30)*(chosenAdventurer.value(forKey: "attackModifier") as! Double))
         questLog.text += "\(adventurerName) attacks for \(damage) damage.\n"
-        enemy.hitPoints -= Int(damage)
+        enemy.hitPoints -= damage
         if enemy.hitPoints <= 0 {
             questLog.text += "Enemy is defeated!\n"
         }
     }
     
     func attackAdventurer(enemy: Enemy, currentHP: Int) {
-        let adventurerName = adventurer.value(forKey: "name") as! String
-        let damage = Double(arc4random())*Double(enemy.attackModifiers)
+        let adventurerName = chosenAdventurer.value(forKey: "name") as! String
+        let damage = Int(Double.random(in: 1...30)*Double(enemy.attackModifiers))
         questLog.text += "Enemy attacks for \(damage) damage.\n"
-        var newCurrentHP = currentHP - Int(damage)
+        var newCurrentHP = currentHP - damage
         if newCurrentHP <= 0 {
             questLog.text += "\(adventurerName) has been defeated by the enemy!\n"
             newCurrentHP = 0

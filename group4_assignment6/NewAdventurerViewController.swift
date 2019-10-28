@@ -21,10 +21,14 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
     @IBOutlet weak var classTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var imageCollectionView: UICollectionView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //imageCollectionView.dataSource
+        //imageCollectionView.delegate
     }
 
     //saves character
@@ -40,22 +44,50 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         dismiss(animated: true, completion: nil)
     }
     
-    let characterImages = ["character1","character2","character3"]
+    let characterImages = ["character1","character2","character3","character4","character5","character6","character7","character8"]
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return characterImages.count
     }
+    
+    var selectedImage = 0
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath as IndexPath) as! AdventurerCollectionViewCell
-        cell.adventurerImage?.image = UIImage(named: "character1")
+        cell.adventurerImage?.image = UIImage(named: characterImages[indexPath.row])
+        
+        if cell.isSelected {
+            cell.layer.borderColor = UIColor.gray.cgColor
+            cell.layer.borderWidth = 2.0
+        } else {
+            cell.layer.borderColor = UIColor.white.cgColor
+            cell.layer.borderWidth = 0.0
+        }
+        
+        selectedImage = indexPath.row
     
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderColor = UIColor.blue.cgColor
+        cell?.layer.borderWidth = 1
+        cell?.isSelected = true
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderColor = UIColor.clear.cgColor
+        cell?.layer.borderWidth = 1
+        cell?.isSelected = false
     }
     
     
@@ -69,13 +101,19 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         let entity = NSEntityDescription.entity(forEntityName: "Adventurer", in: managedContext)! 
         let character = NSManagedObject(entity: entity, insertInto: managedContext)
         
+        var hp = Int.random(in: 1...200)
+        var att = Double.random(in: 1...10)
+        
         //initializes attributes
         character.setValue(name, forKeyPath: "name")
         character.setValue(profession, forKeyPath: "profession")
         character.setValue(1, forKeyPath: "level")
-        character.setValue(10, forKeyPath: "currentHP")
-        character.setValue(10, forKeyPath: "totalHP")
-        character.setValue(3.5, forKeyPath: "attackModifier")
+        character.setValue(hp, forKeyPath: "currentHP")
+        character.setValue(hp, forKeyPath: "totalHP")
+        character.setValue(att, forKeyPath: "attackModifier")
+        
+        character.setValue(characterImages[selectedImage], forKeyPath: "portrait")
+        
         
         do {
             try managedContext.save()

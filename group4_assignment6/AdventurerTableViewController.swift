@@ -62,12 +62,12 @@ class AdventurerTableViewController: UITableViewController {
         let level:Int = adventurer.value(forKey: "level") as! Int
         cell.adventurerLevel?.text = String(level)
         cell.adventurerProfession?.text = adventurer.value(forKeyPath: "profession") as? String
-        let attackModifier: Int = adventurer.value(forKeyPath: "attackModifier") as! Int
-        cell.attackPoints?.text = String(attackModifier)
+        let attackModifier: Double = adventurer.value(forKeyPath: "attackModifier") as! Double
+        cell.attackPoints?.text = String(format: "%.2f", attackModifier)
         let currentHP:Int = adventurer.value(forKeyPath: "currentHP") as! Int
         let totalHP:Int = adventurer.value(forKeyPath: "totalHP") as! Int
         cell.hpPoints?.text = String(currentHP) + "/" + String(totalHP)
-        //cell.adventurerImage?.image = adventurer.value(forKeyPath: "portrait") as? UIImage
+        cell.adventurerImage.image = UIImage(named: (adventurer.value(forKeyPath: "portrait") as? String)!)
 
         return cell
     }
@@ -107,6 +107,23 @@ class AdventurerTableViewController: UITableViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        if editingStyle == .delete {
+            let adventurerToDelete = adventurers[indexPath.row]
+            context.delete(adventurerToDelete)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+        do {
+            adventurers = try context.fetch(Adventurer.fetchRequest())
+        }
+        catch {
+            print(error)
+        }
+        tableView.reloadData()
     }
     
     func deleteAdventurer(name:String) {
