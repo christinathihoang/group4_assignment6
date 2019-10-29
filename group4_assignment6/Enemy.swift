@@ -11,10 +11,10 @@ import UIKit
 class Enemy {
     var name: String
     var level: Int
-    var attackModifiers: Int
+    var attackModifiers: Double
     var hitPoints: Int
     
-    init (name:String, level: Int, attackModifiers: Int, hitPoints: Int) {
+    init (name:String, level: Int, attackModifiers: Double, hitPoints: Int) {
         self.name = name
         self.level = level
         self.attackModifiers = attackModifiers

@@ -60,7 +60,7 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath as IndexPath) as! AdventurerCollectionViewCell
-        cell.adventurerImage?.image = UIImage(named: characterImages[indexPath.row])
+        //cell.adventurerImage?.image = UIImage(named: characterImages[indexPath.row])
         
         if cell.isSelected {
             cell.layer.borderColor = UIColor.gray.cgColor
@@ -101,8 +101,8 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         let entity = NSEntityDescription.entity(forEntityName: "Adventurer", in: managedContext)! 
         let character = NSManagedObject(entity: entity, insertInto: managedContext)
         
-        var hp = Int.random(in: 1...200)
-        var att = Double.random(in: 1...10)
+        let hp = Int.random(in: 1...200)
+        let att = Double.random(in: 1...10)
         
         //initializes attributes
         character.setValue(name, forKeyPath: "name")
