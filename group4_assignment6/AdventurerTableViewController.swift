@@ -33,7 +33,6 @@ class AdventurerTableViewController: UITableViewController {
         //fetch core data here
         fetchData()
    
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +66,7 @@ class AdventurerTableViewController: UITableViewController {
         let currentHP:Int = adventurer.value(forKeyPath: "currentHP") as! Int
         let totalHP:Int = adventurer.value(forKeyPath: "totalHP") as! Int
         cell.hpPoints?.text = String(currentHP) + "/" + String(totalHP)
-        //cell.adventurerImage?.image = UIImage(named: (adventurer.value(forKeyPath: "portrait") as! String))
+        cell.adventurerImage?.image = UIImage(named: (adventurer.value(forKeyPath: "portrait") as! String))
 
         return cell
     }

@@ -26,9 +26,7 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //imageCollectionView.dataSource
-        //imageCollectionView.delegate
+ 
     }
 
     //saves character
@@ -44,7 +42,7 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         dismiss(animated: true, completion: nil)
     }
     
-    let characterImages = ["character1","character2","character3","character4","character5","character6","character7","character8"]
+    let characterImages = ["character1","character2","character3","character4","character5","character6","character7"]
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -60,7 +58,7 @@ class NewAdventurerViewController: UIViewController, UITextFieldDelegate, UIImag
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath as IndexPath) as! AdventurerCollectionViewCell
-        //cell.adventurerImage?.image = UIImage(named: characterImages[indexPath.row])
+        cell.adventurerImage?.image = UIImage(named: characterImages[indexPath.row])
         
         if cell.isSelected {
             cell.layer.borderColor = UIColor.gray.cgColor

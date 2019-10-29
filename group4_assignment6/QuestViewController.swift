@@ -37,7 +37,7 @@ class QuestViewController: UIViewController {
         let currentHP:Int = chosenAdventurer.value(forKeyPath: "currentHP") as! Int
         let totalHP:Int = chosenAdventurer.value(forKeyPath: "totalHP") as! Int
         hpPoints.text = String(currentHP) + "/" + String(totalHP)
-        //adventurerImage.image = UIImage(named: chosenAdventurer.value(forKeyPath: "portrait") as! String)
+        adventurerImage.image = UIImage(named: chosenAdventurer.value(forKeyPath: "portrait") as! String)
         
         startQuestLog()
     }
@@ -95,7 +95,7 @@ class QuestViewController: UIViewController {
         questLog.text += "Enemy attacks for \(damage) damage.\n"
         currentHP -= damage
         if currentHP <= 0 {
-            questLog.text += "\(adventurerName) has been defeated by the enemy!\n End game!"
+            questLog.text += "\(adventurerName) has been defeated by the enemy!\nEnd game!"
             hpPoints.text = "0"
             adventurerTimer.invalidate()
             enemyTimer.invalidate()
