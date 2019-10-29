@@ -48,6 +48,7 @@ class QuestViewController: UIViewController {
     
     var adventurerTimer = Timer()
     var enemyTimer = Timer()
+    var paused = false
     
     var chosenEnemy = Enemy(name: "Enemy", level: Int(arc4random_uniform(5)), attackModifiers: Double.random(in: 1...10), hitPoints: Int.random(in: 1...200))
     
@@ -55,10 +56,10 @@ class QuestViewController: UIViewController {
         questLog.text = "Beginning quest!\n"
                 
         guard adventurerTimer == nil else { return }
-        adventurerTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(arc4random_uniform(10)), repeats: true, block: {_ in self.attackEnemy()})
+        adventurerTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(Int.random(in: 2...10)), repeats: true, block: {_ in self.attackEnemy()})
             
         guard enemyTimer == nil else {return}
-        enemyTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(arc4random_uniform(10)), repeats: true, block: {_ in self.attackAdventurer()})
+        enemyTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(Int.random(in: 2...10)), repeats: true, block: {_ in self.attackAdventurer()})
         }
     
     
@@ -69,17 +70,25 @@ class QuestViewController: UIViewController {
         questLog.text += "\(adventurerName) attacks for \(damage) damage.\n"
         chosenEnemy.hitPoints -= damage
         
+        if paused == true {
+            paused = false
+            guard enemyTimer == nil else {return}
+            enemyTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(arc4random_uniform(10)), repeats: true, block: {_ in self.attackAdventurer()})
+        }
+        
         if chosenEnemy.hitPoints <= 0 {
             enemyCount += 1
             questLog.text += "Enemy \(enemyCount) is defeated!\n"
             chosenEnemy = Enemy(name: "Enemy", level: Int(arc4random_uniform(5)), attackModifiers: Double.random(in: 1...10), hitPoints: Int.random(in: 1...200))
             enemyTimer.invalidate()
-        }
-        if enemyCount%2 == 0 {
-            currentLevel += 1
-            adventurerLevel.text = String(currentLevel)
-            questLog.text += "Level Up!\n"
-            updateData(chosenAdventurer: chosenAdventurer, currentLevel: currentLevel)
+            paused = true
+            
+            if enemyCount%2 == 0 {
+                currentLevel += 1
+                adventurerLevel.text = String(currentLevel)
+                questLog.text += "Level Up!\n"
+                updateData(chosenAdventurer: chosenAdventurer, currentLevel: currentLevel)
+            }
         }
         
         if currentLevel >= 10 {
@@ -96,9 +105,12 @@ class QuestViewController: UIViewController {
         currentHP -= damage
         if currentHP <= 0 {
             questLog.text += "\(adventurerName) has been defeated by the enemy!\nEnd game!"
-            hpPoints.text = "0"
+            hpPoints.text = "0/" + String(Int(chosenAdventurer.value(forKey: "currentHP") as! Int))
             adventurerTimer.invalidate()
             enemyTimer.invalidate()
+        }
+        else {
+            hpPoints.text = String(currentHP) + "/" + String(Int(chosenAdventurer.value(forKey: "currentHP") as! Int))
         }
     }
     
